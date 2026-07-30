@@ -39,7 +39,7 @@ output "private_subnet2_id" {
 }
 
 output "db_instance_endpoint" {
-  value       = aws_db_instance.mariadb_rds.endpoint
+  value       = aws_db_instance.mariadb.endpoint
   description = "The endpoint of the MariaDB RDS instance"
 }
 

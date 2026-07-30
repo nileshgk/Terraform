@@ -106,7 +106,7 @@ variable "availability_zone2" {
 variable "db_name" {
   description = "The name of the MariaDB database"
   type        = string
-  default     = "mydatabase_MariaDB"
+  default     = "mydatabase_mariadb"
 }
 variable "db_username" {
   description = "The username for the MariaDB database"
@@ -117,6 +117,7 @@ variable "db_password" {
   description = "The password for the MariaDB database"
   type        = string
   default     = "admin123"
+  sensitive   = true
 }
 variable "db_engine" {
   description = "The database engine for the RDS instance"
@@ -126,13 +127,6 @@ variable "db_engine" {
 variable "db_engine_version" {
   description = "The version of the database engine"
   type        = string
-  default     = "10.5"
+  default     = "10.11"
 }
-variable "db_parameter_group_name" {
-  description = "The name of the DB parameter group"
-  type        = string
-  default     = "default.mariadb10.5"
-}
-
-
 

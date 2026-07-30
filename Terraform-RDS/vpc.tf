@@ -1,4 +1,4 @@
-# AWS VPC Resource for Jenkins EC2 instance
+# AWS VPC Resource for AWS RDS EC2 instance
 resource "aws_vpc" "AWS_vpc" {
   cidr_block                       = var.cidr
   instance_tenancy                 = var.instance_tenancy
@@ -6,7 +6,7 @@ resource "aws_vpc" "AWS_vpc" {
   enable_dns_support               = var.enable_dns_support
   assign_generated_ipv6_cidr_block = var.enable_ipv6
   tags = {
-    Name        = "Jenkins-VPC"
+    Name        = var.vpcname
     environment = var.vpc_environment
   }
 }
@@ -85,4 +85,24 @@ resource "aws_route_table_association" "AWS_pub_route_table_assoc1" {
 resource "aws_route_table_association" "AWS_pub_route_table_assoc2" {
   subnet_id      = aws_subnet.AWS_pub_subnet2.id
   route_table_id = aws_route_table.AWS_pub_route_table.id
+}
+
+#Private Route Table & Associations (Added)
+resource "aws_route_table" "AWS_pvt_route_table" {
+  vpc_id = aws_vpc.AWS_vpc.id
+
+  tags = {
+    Name        = "${var.vpcname}-pvt-route-table"
+    environment = var.vpc_environment
+  }
+}
+
+resource "aws_route_table_association" "AWS_pvt_route_table_assoc1" {
+  subnet_id      = aws_subnet.AWS_pvt_subnet1.id
+  route_table_id = aws_route_table.AWS_pvt_route_table.id
+}
+
+resource "aws_route_table_association" "AWS_pvt_route_table_assoc2" {
+  subnet_id      = aws_subnet.AWS_pvt_subnet2.id
+  route_table_id = aws_route_table.AWS_pvt_route_table.id
 }
