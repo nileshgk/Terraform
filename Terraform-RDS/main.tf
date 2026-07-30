@@ -3,7 +3,7 @@ provider "aws" {
   region = var.region
 }
 
-# resource Key pair for Jenkins EC2 instance
+# resource Key pair for AWS RDS EC2 instance
 resource "aws_key_pair" "aws_key_pair" {
   key_name   = var.key_name
   public_key = file(var.public_key_path)
@@ -19,7 +19,7 @@ resource "aws_instance" "aws_EC2" {
   vpc_security_group_ids = [aws_security_group.aws_ec2_sg.id]
   
   tags = {
-    Name        = "aws-EC2"
+    Name        = "aws-EC2-RDS-instance"
     environment = var.vpc_environment
   }
 }
